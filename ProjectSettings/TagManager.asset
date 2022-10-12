@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Weapon_Gun
+  - Weapon_Melee
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Ground
   - Body
   - Grab
-  - 
+  - Second Hand Grab
   - 
   - 
   - 

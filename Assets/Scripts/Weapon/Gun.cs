@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
     //public AudioSource audioSource;
     //public AudioClip audioClip;
     
+
     public void Awake()
     {
         bulletsLeft = magSize;
@@ -33,14 +34,20 @@ public class Gun : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+
+    }
+
+
     public void Shoot()
     {
         isReadyToShoot = false;
+        isShooting = true;
 
         Vector3 directionSpread = aimPoint.forward;
         directionSpread.x += Random.Range(-spread /2.0f, spread / 2.0f);
         directionSpread.y += Random.Range(-spread, spread);
-
         GameObject spawnBullet = Instantiate(bullet, aimPoint.position, aimPoint.rotation);
         spawnBullet.GetComponent<Rigidbody>().velocity = speed * directionSpread.normalized;
 
@@ -72,5 +79,15 @@ public class Gun : MonoBehaviour
     {
         bulletsLeft = magSize;
         isReloading = false;
+    }
+
+    public void IncreaseMagSize(int amount)
+    {
+        magSize += amount;
+    }
+
+    public void IncreaseDamage(int amount)
+    {
+        damage += amount;
     }
 }
