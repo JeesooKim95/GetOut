@@ -12,6 +12,6 @@ public class Rifle_DamagePowerUp : PowerUp
     {
         target.GetComponent<Gun>().IncreaseDamage(amount);
         Debug.Log("Damage Increased!");
-        Debug.Log("Current Damage : " + target.GetComponent<Gun>().damage);
+        Debug.Log("Current Damage : " + target.GetComponent<Gun>().GetDamage());
     }
 }

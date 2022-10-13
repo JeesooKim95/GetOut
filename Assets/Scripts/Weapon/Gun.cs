@@ -13,8 +13,8 @@ public class Gun : MonoBehaviour
     public int magSize, tapSize, bulletsLeft, bulletsShot;
     public bool allowHold, isReloading;
     private bool isShooting, isReadyToShoot;
-    public int damage = 10;
     public float range = 100.0f;
+    public int _damage = 10;
 
     //Player
     public GameObject player;
@@ -50,6 +50,7 @@ public class Gun : MonoBehaviour
         directionSpread.y += Random.Range(-spread, spread);
         GameObject spawnBullet = Instantiate(bullet, aimPoint.position, aimPoint.rotation);
         spawnBullet.GetComponent<Rigidbody>().velocity = speed * directionSpread.normalized;
+        spawnBullet.GetComponent<Bullet>().SetDamage(_damage);
 
         bulletsLeft--;
         bulletsShot++;
@@ -60,7 +61,6 @@ public class Gun : MonoBehaviour
         }
         
         //audioSource.PlayOneShot(audioClip);
-        Destroy(spawnBullet, 2);
     }
 
     private void ResetShoot()
@@ -88,12 +88,12 @@ public class Gun : MonoBehaviour
 
     public void IncreaseDamage(int amount)
     {
-        damage += amount;
+        _damage += amount;
     }
 
     public int GetDamage()
     {
-        return damage;
+        return _damage;
     }
 
     public int GetMagSize()

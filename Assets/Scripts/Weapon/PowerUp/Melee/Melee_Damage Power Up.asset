@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95cfb4b90bc55e1439b7012de32da423, type: 3}
-  m_Name: Rifle_Damage Power Up
+  m_Script: {fileID: 11500000, guid: ff9300e4888ff8a4092dab0fc3d909c4, type: 3}
+  m_Name: Melee_Damage Power Up
   m_EditorClassIdentifier: 
-  amount: 5
+  amount: 10

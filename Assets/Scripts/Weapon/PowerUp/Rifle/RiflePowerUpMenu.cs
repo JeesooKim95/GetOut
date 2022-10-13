@@ -6,14 +6,16 @@ using TMPro;
 
 public class RiflePowerUpMenu : MonoBehaviour
 {
-    public Button UpButton;
+    public Button DamageUpButton;
+    public Button MagUpButton;
     public TextMeshProUGUI CurrentStat;
     public GameObject gun;
     private Gun weapon;
-    // Start is called before the first frame update
+
     void Start()
     {
-        UpButton.gameObject.SetActive(false);
+        DamageUpButton.gameObject.SetActive(false);
+        MagUpButton.gameObject.SetActive(false);
         weapon = gun.GetComponent<Gun>();
         var dropDown = transform.GetComponent<TMP_Dropdown>();
         dropDown.options.Clear();
@@ -38,15 +40,32 @@ public class RiflePowerUpMenu : MonoBehaviour
     {
         int index = dropdown.value;
 
-        UpButton.gameObject.SetActive(true);
+        //Damage
+        if (index == 0)
+        {
+            CurrentStat.text = "Current Damage : " + weapon.GetDamage();
+            DamageUpButton.gameObject.SetActive(true);
+        }
+        //Mag Size
+        else if(index == 1)
+        {
+            CurrentStat.text = "Current Magazine Size : " + weapon.GetMagSize();
+            MagUpButton.gameObject.SetActive(true);
+        }
+    }
 
+    void Update()
+    {
+        var dropDown = transform.GetComponent<TMP_Dropdown>();
+
+        int index = dropDown.value;
         //Damage
         if (index == 0)
         {
             CurrentStat.text = "Current Damage : " + weapon.GetDamage();
         }
         //Mag Size
-        if (index == 1)
+        else if(index == 1)
         {
             CurrentStat.text = "Current Magazine Size : " + weapon.GetMagSize();
         }

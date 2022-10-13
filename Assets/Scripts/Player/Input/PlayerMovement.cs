@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PlayerMovement : MonoBehaviour
 {
     public XRNode inputSource;
-    public float speed = 1.0f;
+    public int speed = 1;
     public float gravity = -9.81f;
     public LayerMask groundLayer;
     public float syncHeight = 0.2f;
@@ -67,5 +67,14 @@ public class PlayerMovement : MonoBehaviour
         bool isHit = Physics.SphereCast(rayOrigin, character.radius, Vector3.down, out RaycastHit hitInfo, rayLength, groundLayer);
         return isHit;
     }
+    
+    public void IncreaseSpeed(int amount)
+    {
+        speed += amount; 
+    }
 
+    public int GetSpeed()
+    {
+        return speed;
+    }
 }
