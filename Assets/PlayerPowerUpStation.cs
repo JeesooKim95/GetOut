@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerPowerUpStation : MonoBehaviour
 {
     public GameObject menu;
+    public Material OnActive;
+    public Material OnDeactive;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,7 @@ public class PlayerPowerUpStation : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            gameObject.GetComponent<Renderer>().material = OnActive;
             menu.SetActive(true);
         }
     }
@@ -23,6 +26,7 @@ public class PlayerPowerUpStation : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            gameObject.GetComponent<Renderer>().material = OnDeactive;
             menu.SetActive(false);
         }
     }

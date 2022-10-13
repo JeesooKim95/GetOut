@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     public int magSize, tapSize, bulletsLeft, bulletsShot;
     public bool allowHold, isReloading;
     private bool isShooting, isReadyToShoot;
-    public float damage = 10.0f;
+    public int damage = 10;
     public float range = 100.0f;
 
     //Player
@@ -89,5 +89,15 @@ public class Gun : MonoBehaviour
     public void IncreaseDamage(int amount)
     {
         damage += amount;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
+    }
+
+    public int GetMagSize()
+    {
+        return magSize;
     }
 }

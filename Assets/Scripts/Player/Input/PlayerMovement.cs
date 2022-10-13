@@ -18,8 +18,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 inputAxis;
     private CharacterController character;
 
-
-
     private void Start()
     {
         character = GetComponent<CharacterController>();
@@ -30,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
     {
         InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
         device.TryGetFeatureValue(CommonUsages.primary2DAxis, out inputAxis);
-
     }
 
     private void FixedUpdate()
@@ -61,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
         character.height = origin.CameraInOriginSpaceHeight + syncHeight;
         Vector3 characterCenter = transform.InverseTransformPoint(origin.Camera.gameObject.transform.position);
         character.center = new Vector3(characterCenter.x, characterCenter.y / 2 + character.skinWidth, characterCenter.z);
-
     }
 
     private bool CheckGround()
