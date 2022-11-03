@@ -7,16 +7,33 @@ public class PowerUpStation : MonoBehaviour
     public GameObject RifleMenu;
     public GameObject MeleeMenu;
     public GameObject PlayerMenu;
+    public GameObject WaveMenu;
     public Material OnActive;
     public Material OnDeactive;
     // Start is called before the first frame update
     void Start()
     {
+        WaveMenu.SetActive(true);
         PlayerMenu.SetActive(true);
         RifleMenu.SetActive(false);
         MeleeMenu.SetActive(false);
     }
 
+    void Update()
+    {
+        if(gameObject.activeSelf == true)
+        {
+            WaveMenu.SetActive(true);
+            PlayerMenu.SetActive(true);
+        }
+        else
+        {
+            WaveMenu.SetActive(false);
+            PlayerMenu.SetActive(false);
+            RifleMenu.SetActive(false);
+            MeleeMenu.SetActive(false);
+        }
+    }
 
     public void OnCollisionEnter(Collision collision)
     {

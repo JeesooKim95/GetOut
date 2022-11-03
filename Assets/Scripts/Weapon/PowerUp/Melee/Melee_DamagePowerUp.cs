@@ -6,6 +6,12 @@ using UnityEngine;
 public class Melee_DamagePowerUp : PowerUp
 {
     public int amount;
+    private GameObject player;
+
+    public override void Start()
+    {
+        player = GameObject.Find("Player");
+    }
 
     public override void Apply(GameObject target)
     {

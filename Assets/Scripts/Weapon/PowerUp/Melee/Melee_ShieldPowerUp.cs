@@ -7,6 +7,10 @@ public class Melee_ShieldPowerUp : PowerUp
 {
     public int amount;
 
+    public override void Start()
+    {
+    }
+
     public override void Apply(GameObject target)
     {
         //target.GetComponent<Melee>().IncreaseDamage(amount);

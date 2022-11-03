@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PlayerMovement : MonoBehaviour
 {
     public XRNode inputSource;
-    public int speed = 1;
+    public int speed = 3;
     public float gravity = -9.81f;
     public LayerMask groundLayer;
     public float syncHeight = 0.2f;

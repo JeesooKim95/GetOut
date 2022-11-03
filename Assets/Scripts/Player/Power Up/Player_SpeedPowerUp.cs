@@ -11,6 +11,10 @@ public class Player_SpeedPowerUp : PowerUp
     public int amount;
     private XROrigin origin;
 
+    public override void Start()
+    {
+    }
+
     public override void Apply(GameObject target)
     {
         origin = target.GetComponentInChildren<XROrigin>();

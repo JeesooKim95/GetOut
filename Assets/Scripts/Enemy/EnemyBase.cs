@@ -1,23 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class EnemyBase : MonoBehaviour
 {
     public int maxHealth = 100;
-    
-    // Start is called before the first frame update
-    void Start()
+    public int damage = 10;
+    public NavMeshAgent agent;
+    public Rigidbody rb;
+    protected State currentState = null;
+    protected EnemyAnim_Base anim = null;
+    private float deathAnimTimer = 1.5f;
+    protected virtual void Start()
     {
-        
+        agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+
+        anim = gameObject.GetComponent<EnemyAnim_Base>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void FixedUpdate()
     {
-        if(maxHealth <= 0)
+        if(maxHealth < 0)
         {
-            Destroy(gameObject);
+            anim.Death(true);
+            deathAnimTimer -= Time.deltaTime;
+            if(deathAnimTimer < 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            currentState.FixedUpdate();
         }
     }
 
@@ -31,5 +48,17 @@ public class EnemyBase : MonoBehaviour
         {
             maxHealth -= collision.gameObject.GetComponent<Melee>().GetDamage();
         }
+
+        //if(collision.gameObject.tag == "Player" && currentState.name == "Attack")
+        //{
+        //    collision.gameObject.GetComponent<Health>().TakeDamage(damage);
+        //}
+    }
+
+    protected void SetState(State state)
+    {
+        currentState = state;
+        currentState.Initialize(gameObject, anim);
+        Debug.Log("Enemy Set State : " + state.name);
     }
 }

@@ -8,6 +8,10 @@ public class Rifle_MagSizePowerUp : PowerUp
 {
     public int amount;
 
+    public override void Start()
+    {
+    }
+
     public override void Apply(GameObject target)
     {
         target.GetComponent<Gun>().IncreaseMagSize(amount);

@@ -7,6 +7,12 @@ using UnityEngine;
 public class Player_HealthPowerUp : PowerUp
 {
     public int amount;
+    GameObject player;
+
+    public override void Start()
+    {
+        player = GameObject.Find("Player");
+    }
 
     public override void Apply(GameObject target)
     {
