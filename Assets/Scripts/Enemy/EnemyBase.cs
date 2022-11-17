@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int currHealth = 100;
     public int damage = 10;
     public NavMeshAgent agent;
     public Rigidbody rb;
@@ -23,7 +23,8 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if(maxHealth < 0)
+        currHealth = GetComponent<Health>().currHealth;
+        if(currHealth < 0)
         {
             anim.Death(true);
             deathAnimTimer -= Time.deltaTime;
@@ -42,11 +43,11 @@ public class EnemyBase : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
-            maxHealth -= collision.gameObject.GetComponent<Bullet>().GetDamage();
+            currHealth -= collision.gameObject.GetComponent<Bullet>().GetDamage();
         }
         else if(collision.gameObject.tag == "Weapon_Melee")
         {
-            maxHealth -= collision.gameObject.GetComponent<Melee>().GetDamage();
+            currHealth -= collision.gameObject.GetComponent<Melee>().GetDamage();
         }
 
         //if(collision.gameObject.tag == "Player" && currentState.name == "Attack")
@@ -61,4 +62,5 @@ public class EnemyBase : MonoBehaviour
         currentState.Initialize(gameObject, anim);
         Debug.Log("Enemy Set State : " + state.name);
     }
+
 }

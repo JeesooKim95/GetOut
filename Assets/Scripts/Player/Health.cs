@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currHealth < 0)
+        if (gameObject.tag == "Player" && currHealth < 0)
         {
             SceneManager.LoadScene("PlayTest");
         }
@@ -24,7 +24,6 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Player Took Damage : " + damage);
         currHealth -= damage;
     }
 
