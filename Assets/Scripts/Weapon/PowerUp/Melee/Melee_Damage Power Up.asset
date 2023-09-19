@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Melee_Damage Power Up
   m_EditorClassIdentifier: 
   amount: 10
+  cost: 1

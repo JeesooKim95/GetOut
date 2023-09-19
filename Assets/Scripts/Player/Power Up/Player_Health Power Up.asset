@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Player_Health Power Up
   m_EditorClassIdentifier: 
   amount: 50
+  cost: 1

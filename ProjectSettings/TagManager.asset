@@ -8,6 +8,8 @@ TagManager:
   - Weapon_Melee
   - Bullet
   - Enemy
+  - PointManager
+  - PlayerHand
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class PowerUpStation : MonoBehaviour
     public GameObject MeleeMenu;
     public GameObject PlayerMenu;
     public GameObject WaveMenu;
+    public GameObject PointMenu;
     public Material OnActive;
     public Material OnDeactive;
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class PowerUpStation : MonoBehaviour
     {
         WaveMenu.SetActive(true);
         PlayerMenu.SetActive(true);
+        PointMenu.SetActive(true);
         RifleMenu.SetActive(false);
         MeleeMenu.SetActive(false);
     }

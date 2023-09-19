@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth = 200;
+    public int maxHealth = 100;
     public int currHealth;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     {
         if (gameObject.tag == "Player" && currHealth < 0)
         {
-            SceneManager.LoadScene("PlayTest");
+            SceneManager.LoadScene("Menu");
         }
     }
 

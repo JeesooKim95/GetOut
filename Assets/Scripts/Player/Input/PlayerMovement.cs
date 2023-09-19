@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PlayerMovement : MonoBehaviour
 {
     public XRNode inputSource;
-    public int speed = 3;
+    public float speed = 3;
     public float gravity = -9.81f;
     public LayerMask groundLayer;
     public float syncHeight = 0.2f;
@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private XROrigin origin;
     private Vector2 inputAxis;
     private CharacterController character;
+
+    public AudioSource footstep;
+    private Vector2 lastFrameInput;
 
     private void Start()
     {
@@ -28,6 +31,19 @@ public class PlayerMovement : MonoBehaviour
     {
         InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
         device.TryGetFeatureValue(CommonUsages.primary2DAxis, out inputAxis);
+        
+        if(lastFrameInput != inputAxis)
+        {
+            //Debug.Log("Player Moved!");
+            footstep.enabled = true;
+        }
+        else
+        {
+            //Debug.Log("Stayed!");
+            footstep.enabled = false;
+        }
+
+        lastFrameInput = inputAxis;
     }
 
     private void FixedUpdate()
@@ -68,12 +84,12 @@ public class PlayerMovement : MonoBehaviour
         return isHit;
     }
     
-    public void IncreaseSpeed(int amount)
+    public void IncreaseSpeed(float amount)
     {
         speed += amount; 
     }
 
-    public int GetSpeed()
+    public float GetSpeed()
     {
         return speed;
     }

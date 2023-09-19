@@ -6,18 +6,23 @@ using UnityEngine;
 
 public class Player_HealthPowerUp : PowerUp
 {
-    public int amount;
+    public int amount, cost; 
     GameObject player;
+    PointManager PM;
 
-    public override void Start()
+    public override void Awake()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player");        
     }
 
     public override void Apply(GameObject target)
     {
-        target.GetComponent<Health>().IncreaseMaxHealth(amount);
-        Debug.Log("Health Increased!");
-        Debug.Log("Current Health : " + target.GetComponent<Health>().GetMaxHealth());
+        GameObject _pm = GameObject.FindGameObjectWithTag("PointManager");
+        PM = _pm.GetComponent<PointManager>();
+        if (PM.point >= cost)
+        {
+            target.GetComponent<Health>().IncreaseMaxHealth(amount);
+            PM.DecreasePoint(cost);
+        }
     }
 }

@@ -6,16 +6,22 @@ using UnityEngine;
 
 public class Rifle_MagSizePowerUp : PowerUp
 {
-    public int amount;
+    public int amount, cost;
+    PointManager PM;
 
-    public override void Start()
+    public override void Awake()
     {
+
     }
 
     public override void Apply(GameObject target)
     {
-        target.GetComponent<Gun>().IncreaseMagSize(amount);
-        Debug.Log("Mag Size Increased!");
-        Debug.Log("Current Mag Size : " + target.GetComponent<Gun>().magSize);
+        GameObject _pm = GameObject.FindGameObjectWithTag("PointManager");
+        PM = _pm.GetComponent<PointManager>();
+        if (PM.point >= cost)
+        {
+            target.GetComponent<Gun>().IncreaseMagSize(amount);
+            PM.DecreasePoint(cost);
+        }            
     }
 }

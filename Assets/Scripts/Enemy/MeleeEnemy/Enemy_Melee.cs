@@ -23,6 +23,7 @@ public class Enemy_Melee : EnemyBase
         float distance = Vector3.Distance(player.transform.position, transform.position);
         if (currentState == chaseState)
         {
+            FindObjectOfType<AudioManager>().Play("Zombie_Default");
             if (distance <= attackRange)
             {
                 SetState(attackState);
@@ -40,5 +41,4 @@ public class Enemy_Melee : EnemyBase
             }
         }
     }
-
 }

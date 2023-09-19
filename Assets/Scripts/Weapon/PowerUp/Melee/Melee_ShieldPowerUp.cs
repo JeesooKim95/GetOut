@@ -5,21 +5,26 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUp/Melee_ShieldPowerUp")]
 public class Melee_ShieldPowerUp : PowerUp
 {
-    public int amount;
+    public int amount, cost;
+    PointManager PM;
 
-    public override void Start()
+    public override void Awake()
     {
+        
     }
 
     public override void Apply(GameObject target)
     {
-        //target.GetComponent<Melee>().IncreaseDamage(amount);
-        GameObject[] meleeSet = GameObject.FindGameObjectsWithTag("Weapon_Melee");
-        foreach (var melee in meleeSet)
+        GameObject _pm = GameObject.FindGameObjectWithTag("PointManager");
+        PM = _pm.GetComponent<PointManager>();
+        if (PM.point >= cost)
         {
-            melee.GetComponent<Melee>().IncreaseShield(amount);
-        }
-        Debug.Log("Shield Increased!");
-        Debug.Log("Current Shield : " + target.GetComponent<Melee>().GetShield());
+            GameObject[] meleeSet = GameObject.FindGameObjectsWithTag("Weapon_Melee");
+            foreach (var melee in meleeSet)
+            {
+                melee.GetComponent<Melee>().IncreaseShield(amount);
+            }
+            PM.DecreasePoint(cost);
+        }        
     }
 }

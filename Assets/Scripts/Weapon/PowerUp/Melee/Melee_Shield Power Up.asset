@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Melee_Shield Power Up
   m_EditorClassIdentifier: 
   amount: 100
+  cost: 1

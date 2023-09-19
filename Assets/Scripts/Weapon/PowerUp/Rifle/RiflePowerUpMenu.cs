@@ -45,12 +45,14 @@ public class RiflePowerUpMenu : MonoBehaviour
         {
             CurrentStat.text = "Current Damage : " + weapon.GetDamage();
             DamageUpButton.gameObject.SetActive(true);
+            MagUpButton.gameObject.SetActive(false);
         }
         //Mag Size
         else if(index == 1)
         {
             CurrentStat.text = "Current Magazine Size : " + weapon.GetMagSize();
             MagUpButton.gameObject.SetActive(true);
+            DamageUpButton.gameObject.SetActive(false);
         }
     }
 

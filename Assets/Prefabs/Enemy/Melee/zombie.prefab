@@ -247,9 +247,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692061590152516224}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 72.43, y: -0.83999234, z: -0.98}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5110151930616115110}
   - {fileID: 4508364536848510924}
@@ -287,8 +287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdab962c19fab014096163518b2dc5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  currHealth: 100
   damage: 10
+  point: 1
   agent: {fileID: 0}
   rb: {fileID: 0}
 --- !u!195 &692061590152516226
@@ -335,8 +336,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.6387897
+  m_Radius: 0.3
+  m_Height: 1.85
   m_Direction: 1
   m_Center: {x: 0, y: 0.81939334, z: 0}
 --- !u!114 &-8705928048129574583

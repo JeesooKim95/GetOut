@@ -50,43 +50,21 @@ public class Gun : MonoBehaviour
 
 
     public void Shoot()
-    {
-        /*
-        isReadyToShoot = false;
-        isShooting = true;
-
-        Vector3 directionSpread = aimPoint.forward;
-        directionSpread.x += Random.Range(-spread /2.0f, spread / 2.0f);
-        directionSpread.y += Random.Range(-spread, spread);
-        GameObject spawnBullet = Instantiate(bullet, aimPoint.position, aimPoint.rotation);
-        spawnBullet.GetComponent<Rigidbody>().velocity = speed * directionSpread.normalized;
-        spawnBullet.GetComponent<Bullet>().SetDamage(_damage);
-
-        bulletsLeft--;
-        bulletsShot++;
-
-        if (muzzleFlash != null)
+    {   
+        if (lastShotTime + timeBetweenShooting < Time.time /*&& bulletsLeft > 0*/)
         {
-            //muzzleFlash.Emit(100);
-        }
-        
-        //audioSource.PlayOneShot(audioClip);
-        */
-
-        if (lastShotTime + timeBetweenShooting < Time.time)
-        {
+            FindObjectOfType<AudioManager>().Play("Rifle_Single");
             Vector3 direction = GetDirection();
 
             if (Physics.Raycast(aimPoint.position, direction, out RaycastHit hit, float.MaxValue, mask))
-            {
+            { 
+                
                 TrailRenderer trail = Instantiate(bullet_trail, aimPoint.position, Quaternion.identity);
 
                 StartCoroutine(SpawnTrail(trail, hit));
 
-                Debug.Log(hit.collider.tag);
                 if (hit.collider.tag =="Enemy")
                 {
-                    Debug.Log("Enemy hit");
                     hit.collider.GetComponent<Health>().TakeDamage(_damage);
                 }
             }
@@ -100,6 +78,10 @@ public class Gun : MonoBehaviour
             }
 
             lastShotTime = Time.time;
+        }
+        else if(bulletsLeft <= 0)
+        {
+            FindObjectOfType<AudioManager>().Play("Rifle_Empty");
         }
     }
 
@@ -130,7 +112,9 @@ public class Gun : MonoBehaviour
         }
         //Animator.SetBool("IsShooting", false);
         trail.transform.position = hit.point;
+        
         Instantiate(impact_particle, hit.point, Quaternion.LookRotation(hit.normal));
+               
 
         Destroy(trail.gameObject, trail.time);
     }

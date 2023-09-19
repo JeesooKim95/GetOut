@@ -8,18 +8,25 @@ using Unity.XR.CoreUtils;
 
 public class Player_SpeedPowerUp : PowerUp
 {
-    public int amount;
+    public int cost;
+    public float amount;
     private XROrigin origin;
+    PointManager PM;
 
-    public override void Start()
+    public override void Awake()
     {
+        
     }
 
     public override void Apply(GameObject target)
     {
-        origin = target.GetComponentInChildren<XROrigin>();
-        origin.GetComponent<PlayerMovement>().IncreaseSpeed(amount);
-        Debug.Log("Speed Increased!");
-        Debug.Log("Current Speed : " + origin.GetComponent<PlayerMovement>().GetSpeed());
+        GameObject _pm = GameObject.FindGameObjectWithTag("PointManager");
+        PM = _pm.GetComponent<PointManager>();
+        if (PM.point >= cost)
+            {
+                origin = target.GetComponentInChildren<XROrigin>();
+                origin.GetComponent<PlayerMovement>().IncreaseSpeed(amount);
+                PM.DecreasePoint(cost);
+            }              
     }
 }

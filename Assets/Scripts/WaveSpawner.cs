@@ -6,6 +6,14 @@ using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public float speedIncrement = 0.2f;
+    public int damageIncrement = 10;
+    public int healthIncrement = 40;
+
+    public GameObject[] WIN;
+    public GameObject menu;
+    private int currentLevel = 0;
+    public GameObject EnemyPrefab;
     public enum SpawnState
     {
         SPAWNING,
@@ -17,13 +25,13 @@ public class WaveSpawner : MonoBehaviour
     public class Wave
     {
         public string name;
-        public Transform enemy;
+        public GameObject enemy;
         public int count;
         public float spawnRate;
     }
 
     public Wave[] waves;
-    private int waveIndex = -1;
+    private int waveIndex = 0;
 
     public Transform[] spawnPoints;
     private int spawnIndex = 0;
@@ -37,6 +45,8 @@ public class WaveSpawner : MonoBehaviour
     public Button button;
     public GameObject PlayerMenu;
     public GameObject WaveMenu;
+    public GameObject PointMenu;
+
 
     private void Start()
     {
@@ -61,8 +71,17 @@ public class WaveSpawner : MonoBehaviour
 
         if(state == SpawnState.POWERUP)
         {
+            if (waveIndex >= waves.Length)
+            {
+                foreach (GameObject w in WIN)
+                {
+                    w.SetActive(true);
+                    menu.SetActive(true);
+                }
+            }
             powerUpStation.SetActive(true);
             WaveMenu.SetActive(true);
+            PointMenu.SetActive(true);
 
             //reset 
             waveCountdown = timeBetweenWaves;
@@ -73,15 +92,11 @@ public class WaveSpawner : MonoBehaviour
         if (waveCountdown <= 0)
         {
             if (state == SpawnState.SPAWNING && WaveCleared())
-            {
-                waveIndex++;
-                Debug.Log("Spawning Wave"); 
-                if (waveIndex >= waves.Length)
-                {
-                    Debug.Log("Game Complete! Looping...");
-                    waveIndex = 0;
-                }
+            {                
                 StartCoroutine(SpawnWave(waves[waveIndex]));
+                EnemyPrefab.GetComponent<Enemy_Melee>().PowerUpEnemy(currentLevel);
+                waveIndex++;
+                currentLevel++;
             }
         }
         else
@@ -96,6 +111,7 @@ public class WaveSpawner : MonoBehaviour
         powerUpStation.SetActive(false);
         WaveMenu.SetActive(false);
         PlayerMenu.SetActive(false);
+        PointMenu.SetActive(false);
     }
 
     bool WaveCleared()
@@ -117,7 +133,6 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnWave(Wave _wave)
     {
         state = SpawnState.SPAWNING;
-        Debug.Log("Spawn Wave : " + _wave.name);
         for (int i = 0; i < _wave.count; i++)
         {
             SpawnEnemy(_wave.enemy);
@@ -129,9 +144,12 @@ public class WaveSpawner : MonoBehaviour
         yield break;
     }
 
-    void SpawnEnemy(Transform _enemy)
-    {
-        Instantiate(_enemy, spawnPoints[spawnIndex].position, transform.rotation);
+    void SpawnEnemy(GameObject _enemy)
+    {        
+        GameObject enemy = Instantiate(_enemy, spawnPoints[spawnIndex].position, transform.rotation) as GameObject;
+        enemy.GetComponent<EnemyBase>().speed += currentLevel * speedIncrement;
+        enemy.GetComponent<EnemyBase>().damage += currentLevel * damageIncrement;
+        enemy.GetComponent<Health>().maxHealth += currentLevel * healthIncrement;
         spawnIndex++;
         if(spawnIndex >= spawnPoints.Length)
         {

@@ -49,12 +49,14 @@ public class PlayerPowerUpMenu : MonoBehaviour
         {
             CurrentStat.text = "Current Health : " + playerHealth.GetMaxHealth();
             HealthUpButton.gameObject.SetActive(true);
+            SpeedUpButton.gameObject.SetActive(false);
         }
         //Mag Size
         else if (index == 1)
         {
             CurrentStat.text = "Current Speed : " + playerHandle.GetSpeed();
             SpeedUpButton.gameObject.SetActive(true);
+            HealthUpButton.gameObject.SetActive(false);
         }
     }
 

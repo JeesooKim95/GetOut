@@ -6,18 +6,22 @@ using UnityEngine;
 
 public class Rifle_DamagePowerUp : PowerUp
 {
-    public int amount;
+    public int amount, cost;
     GameObject player;
-
-    public override void Start()
+    PointManager PM;
+    public override void Awake()
     {
         player = GameObject.Find("Player");
     }
 
     public override void Apply(GameObject target)
     {
-        target.GetComponent<Gun>().IncreaseDamage(amount);
-        Debug.Log("Damage Increased!");
-        Debug.Log("Current Damage : " + target.GetComponent<Gun>().GetDamage());
+        GameObject _pm = GameObject.FindGameObjectWithTag("PointManager");
+        PM = _pm.GetComponent<PointManager>();
+        if (PM.point >= cost)
+        {
+            target.GetComponent<Gun>().IncreaseDamage(amount);
+            PM.DecreasePoint(cost);
+        }        
     }
 }

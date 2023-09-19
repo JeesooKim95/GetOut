@@ -17,7 +17,7 @@ public class State_MeleeEnemyChase : State
         if (enemy.agent != null)
         {
             enemy.agent.enabled = true;
-            enemy.agent.speed = 1.0f;
+            enemy.agent.speed = enemy.speed;
         }
     }
 

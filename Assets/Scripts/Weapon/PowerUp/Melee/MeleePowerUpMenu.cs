@@ -7,7 +7,7 @@ using TMPro;
 public class MeleePowerUpMenu : MonoBehaviour
 {
     public Button DamageUpButton;
-    public Button ShiledUpButton;
+    public Button ShieldUpButton;
     public TextMeshProUGUI CurrentStat;
     public GameObject gauntlet;
     private Melee weapon;
@@ -15,7 +15,7 @@ public class MeleePowerUpMenu : MonoBehaviour
     void Start()
     {
         DamageUpButton.gameObject.SetActive(false);
-        ShiledUpButton.gameObject.SetActive(false);
+        ShieldUpButton.gameObject.SetActive(false);
         weapon = gauntlet.GetComponent<Melee>();
         var dropDown = transform.GetComponent<TMP_Dropdown>();
         dropDown.options.Clear();
@@ -45,12 +45,14 @@ public class MeleePowerUpMenu : MonoBehaviour
         {
             CurrentStat.text = "Current Damage : " + weapon.GetDamage();
             DamageUpButton.gameObject.SetActive(true);
+            ShieldUpButton.gameObject.SetActive(false);
         }
         //Shield
         else if(index == 1)
         {
             CurrentStat.text = "Current Shield : " + weapon.GetShield();
-            ShiledUpButton.gameObject.SetActive(true);
+            ShieldUpButton.gameObject.SetActive(true);
+            DamageUpButton.gameObject.SetActive(false);
         }
     }
 
